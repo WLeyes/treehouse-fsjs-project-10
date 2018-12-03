@@ -30,11 +30,11 @@ module.exports = function validateUserSignUp(data) {
   }
 
   // Email
-  if (validator.isEmpty(data.emailAddress)) {
-    errors.emailAddress = "Email is required.";
-  }
   if (!validator.isEmail(data.emailAddress)) {
     errors.emailAddress = "Invalid email format.";
+  }
+  if (validator.isEmpty(data.emailAddress)) {
+    errors.emailAddress = "Email is required.";
   }
 
   // Password
