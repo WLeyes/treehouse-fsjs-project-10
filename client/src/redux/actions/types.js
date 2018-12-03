@@ -1,0 +1,9 @@
+export const GET_USER = "GET_USER";
+export const CREATE_NEW_USER = "CREATE_NEW_USER";
+
+export const GET_ALL_COURSES = "GET_ALL_COURSES";
+export const GET_COURSE_BY_ID = "GET_COURSE_BY_ID";
+export const UPDATE_COURSE_BY_ID = "UPDATE_COURSE_BY_ID";
+export const DELETE_COURSE_BY_ID = "DELETE_COURSE_BY_ID";
+
+export const GET_ERRORS = "GET_ERRORS";
