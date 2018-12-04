@@ -30,7 +30,6 @@ class UserSignUp extends Component {
       password,
       confirmPassword
     } = this.state;
-
     event.preventDefault();
     const newUser = {
       firstName,
@@ -40,7 +39,6 @@ class UserSignUp extends Component {
       confirmPassword
     };
     this.props.createNewUser(newUser);
-    // todo: move axios call to redux action
   };
 
   render() {
@@ -49,9 +47,9 @@ class UserSignUp extends Component {
       lastName,
       emailAddress,
       password,
-      confirmPassword,
-      errors
+      confirmPassword
     } = this.state;
+    const { errors } = this.state;
     const { onChange, onSubmit } = this;
     return (
       <div className="bounds">
@@ -65,6 +63,7 @@ class UserSignUp extends Component {
                 value={firstName}
                 onChange={onChange}
               />
+              <div>{errors.firstName}</div>
               <FormInput
                 name="lastName"
                 placeholder="Last Name"

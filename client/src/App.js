@@ -5,8 +5,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Layout from "./Components/Layout";
 import PublicRoute from "./Components/Routes/publicRoutes";
-import Courses from "./Components/Courses";
+
 import UserSignUp from "./Components/Users/UserSignUp";
+import UserSignIn from "./Components/Users/UserSignin";
+
+import Courses from "./Components/Courses";
 class App extends Component {
   render() {
     return (
@@ -21,6 +24,13 @@ class App extends Component {
               component={Courses}
             />
 
+            <PublicRoute
+              restricted={true}
+              {...this.props}
+              exact
+              path="/signin"
+              component={UserSignIn}
+            />
             <PublicRoute
               restricted={true}
               {...this.props}
