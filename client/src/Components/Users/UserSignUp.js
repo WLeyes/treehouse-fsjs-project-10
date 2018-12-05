@@ -68,24 +68,16 @@ class UserSignUp extends Component {
                 placeholder="First Name"
                 value={firstName}
                 onChange={onChange}
+                error={errors.firstName}
               />
-              {errors.firstName && (
-                <div className="validation--errors--label">
-                  {errors.firstName}
-                </div>
-              )}
 
               <FormInput
                 name="lastName"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={onChange}
+                error={errors.lastName}
               />
-              {errors.lastName && (
-                <div className="validation--errors--label">
-                  {errors.lastName}
-                </div>
-              )}
 
               <FormInput
                 name="emailAddress"
@@ -93,12 +85,8 @@ class UserSignUp extends Component {
                 placeholder="Email Address"
                 value={emailAddress}
                 onChange={onChange}
+                error={errors.emailAddress}
               />
-              {errors.emailAddress && (
-                <div className="validation--errors--label">
-                  {errors.emailAddress}
-                </div>
-              )}
 
               <FormInput
                 name="password"
@@ -106,12 +94,8 @@ class UserSignUp extends Component {
                 placeholder="Password"
                 value={password}
                 onChange={onChange}
+                error={errors.password}
               />
-              {errors.password && (
-                <div className="validation--errors--label">
-                  {errors.password}
-                </div>
-              )}
 
               <FormInput
                 name="confirmPassword"
@@ -119,12 +103,14 @@ class UserSignUp extends Component {
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={onChange}
+                error={errors.confirmPassword}
               />
-              {errors.confirmPassword && (
+
+              {
                 <div className="validation--errors--label">
-                  {errors.confirmPassword}
+                  {errors.message}
                 </div>
-              )}
+              }
 
               <div className="grid-100 pad-bottom">
                 <button className="button" type="submit" onClick={onSubmit}>

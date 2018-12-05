@@ -383,6 +383,8 @@ p {
 /* line 87, ../sass/global.sass */
 
 .grid-100 {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
 }
 
@@ -925,6 +927,7 @@ input:focus {
   color: #7c689b;
   font-size: 0.8em;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .validation-errors ul {

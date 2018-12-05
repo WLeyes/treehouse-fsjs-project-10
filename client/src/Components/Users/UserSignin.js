@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import isEmpty from "../../utils/isEmpty";
+
 import { connect } from "react-redux";
 
 import { FormInput } from "../Layout/formFields";
@@ -26,11 +26,8 @@ class UserSignIn extends Component {
 
   onSubmit = event => {
     event.preventDefault();
-    const { emailAddress, password, errors } = this.state;
+    const { emailAddress, password } = this.state;
     this.props.getUser(emailAddress, password, this.props.history);
-    if (!errors) {
-      console.log("no errors?", errors);
-    }
   };
 
   render() {
@@ -48,12 +45,8 @@ class UserSignIn extends Component {
                 placeholder="Email Address"
                 value={emailAddress}
                 onChange={onChange}
+                error={errors.emailAddress}
               />
-              {errors.emailAddress && (
-                <div className="validation--errors--label">
-                  {errors.emailAddress}
-                </div>
-              )}
 
               <FormInput
                 name="password"
@@ -61,19 +54,15 @@ class UserSignIn extends Component {
                 type="password"
                 value={password}
                 onChange={onChange}
+                error={errors.password}
               />
-              {errors.password && (
-                <div className="validation--errors--label">
-                  {errors.password}
-                </div>
-              )}
 
+              {
+                <div className="validation--errors--label">
+                  {errors.message}
+                </div>
+              }
               <div className="grid-100 pad-bottom">
-                {errors.message && (
-                  <div className="validation--errors--label">
-                    {errors.message}
-                  </div>
-                )}
                 <button className="button" type="submit" onClick={onSubmit}>
                   Sign In
                 </button>
