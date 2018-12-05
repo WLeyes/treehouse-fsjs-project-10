@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { withRouter } from "react-router-dom";
 import { FormInput, FormTextarea } from "../Layout/formFields";
 
 import { connect } from "react-redux";
@@ -14,34 +14,75 @@ class CreateCourse extends Component {
       description: "",
       estimatedTime: "",
       materialsNeeded: "",
-      errors: {}
+      errors: {},
+      user: this.props.user
     };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   onChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
   onSubmit = event => {
-    const { title, description, estimatedTime, materialsNeeded } = this.state;
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      user
+    } = this.state;
     event.preventDefault();
+    const course = {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      user
+    };
+    this.props.createCourse(course, this.props.history);
   };
 
   render() {
     const { onChange, onSubmit } = this;
-    const { title, description, estimatedTime, materialsNeeded } = this.state;
+    const {
+      title,
+      description,
+      estimatedTime,
+      materialsNeeded,
+      errors
+    } = this.state;
     return (
       <div className="bounds course--detail">
         <h1>Create Course</h1>
         <div>
-          <div>
-            <h2 className="validation--errors--label">Validation errors</h2>
-            <div className="validation-errors">
-              <ul>
-                <li>Please provide a value for "Title"</li>
-                <li>Please provide a value for "Description"</li>
-              </ul>
+          {errors.title || errors.description || errors.message ? (
+            <div>
+              <h2 className="validation--errors--label">Validation errors</h2>
+              <div className="validation-errors">
+                <ul>
+                  {errors.title && (
+                    <li className="validation--errors--label">
+                      {errors.title}
+                    </li>
+                  )}
+                  {errors.description && (
+                    <li className="validation--errors--label">
+                      {errors.description}
+                    </li>
+                  )}
+                  {errors.message && (
+                    <li className="validation--errors--label">
+                      {errors.message}
+                    </li>
+                  )}
+                </ul>
+              </div>
             </div>
-          </div>
+          ) : null}
           <form onSubmit={onSubmit}>
             <div className="grid-66">
               <div className="course--header">
@@ -110,14 +151,11 @@ class CreateCourse extends Component {
 CreateCourse.propTypes = {
   errors: PropTypes.object,
   user: PropTypes.object.isRequired,
-  course: PropTypes.object.isRequired,
   createCourse: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    course: state.courses.course,
-    courseAuthor: state.courses.courseAuthor,
     user: state.users.user,
     errors: state.errors
   };
@@ -126,4 +164,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { createCourse }
-)(CreateCourse);
+)(withRouter(CreateCourse));

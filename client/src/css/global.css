@@ -383,8 +383,6 @@ p {
 /* line 87, ../sass/global.sass */
 
 .grid-100 {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
 }
 
@@ -696,19 +694,19 @@ p {
 
 /* line 303, ../sass/global.sass */
 
-.course--stats--list > li {
+.course--stats--list>li {
   margin-bottom: 50px;
 }
 
 /* line 305, ../sass/global.sass */
 
-.course--stats--list > li ul {
+.course--stats--list>li ul {
   padding-left: 20px;
 }
 
 /* line 307, ../sass/global.sass */
 
-.course--stats--list > li li {
+.course--stats--list>li li {
   margin-bottom: 15px;
   list-style-type: circle;
 }
@@ -925,9 +923,7 @@ input:focus {
 
 .validation--errors--label {
   color: #7c689b;
-  font-size: 0.8em;
-  margin-bottom: 16px;
-  text-align: center;
+  font-size: 28px;
 }
 
 .validation-errors ul {

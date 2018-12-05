@@ -42,9 +42,9 @@ router.post("/", (req, res, next) => {
           .then(result => {
             res.status(201).json({ message: "Your account has been created." });
           })
-          .catch(err => {
+          .catch(error => {
             res.status(500).json({
-              error: err
+              error
             });
           });
       }

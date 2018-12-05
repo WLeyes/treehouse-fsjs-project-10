@@ -3,10 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const Course = require("../models/Course");
-const User = require("../models/User");
-const bcrypt = require("bcryptjs");
-
-const auth = require("basic-auth");
+const validateNewCourse = require("../validation/NewCourse");
 
 router.param("cID", function(req, res, next, id) {
   if (id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -29,7 +26,13 @@ router.param("cID", function(req, res, next, id) {
 });
 
 // CREATE - POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
+  console.log(req.body);
+  // validation
+  const { errors, isValid } = validateNewCourse(req.body);
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   Course.find({ title: req.body.title })
     .exec()
     .then(course => {
@@ -38,7 +41,7 @@ router.post("/", (req, res, next) => {
           message: "There is already a course with that title"
         });
       } else {
-        if (req.user) {
+        if (req.body.user) {
           const newCourse = new Course({
             user: req.user,
             title: req.body.title,
@@ -53,10 +56,9 @@ router.post("/", (req, res, next) => {
                 .status(201)
                 .json({ message: "Your course has been created." });
             })
-            .catch(err => {
-              console.log("[ ERROR ]", err);
+            .catch(error => {
               res.status(500).json({
-                error: err
+                error
               });
             });
         } else {
