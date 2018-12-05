@@ -1,7 +1,7 @@
 import { GET_USER, USER_LOGOUT } from "../actions/types";
 import isEmpty from "../../utils/isEmpty";
 const initialState = {
-  isAthenticated: false,
+  isAuthenticated: false,
   user: {}
 };
 
@@ -10,14 +10,14 @@ export default (state = initialState, action) => {
     case GET_USER:
       return {
         ...state,
-        isAthenticated: !isEmpty(action.payload),
+        isAuthenticated: !isEmpty(action.payload),
         user: action.payload
       };
     case USER_LOGOUT:
       return {
         ...state,
         user: {},
-        isAthenticated: !isEmpty(action.payload)
+        isAuthenticated: !isEmpty(action.payload)
       };
     default:
       return state;

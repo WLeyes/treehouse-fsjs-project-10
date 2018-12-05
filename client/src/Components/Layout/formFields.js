@@ -65,7 +65,7 @@ FormTextarea.defaultProps = {
   type: "text"
 };
 
-FormTextarea.PropTypes = {
+FormTextarea.propTypes = {
   name: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string.isRequired,
