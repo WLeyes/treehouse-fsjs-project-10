@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { createNewUser } from "../../redux/actions/userActions";
 
@@ -17,6 +17,12 @@ class UserSignUp extends Component {
       confirmPassword: "",
       errors: {}
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
 
   onChange = event =>
@@ -38,7 +44,7 @@ class UserSignUp extends Component {
       password,
       confirmPassword
     };
-    this.props.createNewUser(newUser);
+    this.props.createNewUser(newUser, this.props.history);
   };
 
   render() {
@@ -63,13 +69,24 @@ class UserSignUp extends Component {
                 value={firstName}
                 onChange={onChange}
               />
-              <div>{errors.firstName}</div>
+              {errors.firstName && (
+                <div className="validation--errors--label">
+                  {errors.firstName}
+                </div>
+              )}
+
               <FormInput
                 name="lastName"
                 placeholder="Last Name"
                 value={lastName}
                 onChange={onChange}
               />
+              {errors.lastName && (
+                <div className="validation--errors--label">
+                  {errors.lastName}
+                </div>
+              )}
+
               <FormInput
                 name="emailAddress"
                 type="email"
@@ -77,6 +94,12 @@ class UserSignUp extends Component {
                 value={emailAddress}
                 onChange={onChange}
               />
+              {errors.emailAddress && (
+                <div className="validation--errors--label">
+                  {errors.emailAddress}
+                </div>
+              )}
+
               <FormInput
                 name="password"
                 type="password"
@@ -84,6 +107,12 @@ class UserSignUp extends Component {
                 value={password}
                 onChange={onChange}
               />
+              {errors.password && (
+                <div className="validation--errors--label">
+                  {errors.password}
+                </div>
+              )}
+
               <FormInput
                 name="confirmPassword"
                 type="password"
@@ -91,6 +120,12 @@ class UserSignUp extends Component {
                 value={confirmPassword}
                 onChange={onChange}
               />
+              {errors.confirmPassword && (
+                <div className="validation--errors--label">
+                  {errors.confirmPassword}
+                </div>
+              )}
+
               <div className="grid-100 pad-bottom">
                 <button className="button" type="submit" onClick={onSubmit}>
                   Sign Up
@@ -123,4 +158,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createNewUser }
-)(UserSignUp);
+)(withRouter(UserSignUp));

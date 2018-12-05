@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Course = require("../models/Course");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 const auth = require("basic-auth");
 
@@ -26,34 +26,6 @@ router.param("cID", function(req, res, next, id) {
     error.status = 404;
     return next(error);
   }
-});
-
-// Middleware Returns the currently authenticated user || todo: fix if username is wrong
-router.use((req, res, next) => {
-  auth(req)
-    ? User.findOne({ emailAddress: auth(req).name }).exec(function(
-        error,
-        user
-      ) {
-        if (user) {
-          if (bcrypt.compareSync(auth(req).pass, user.password)) {
-            console.log("Passwords match");
-            req.user = user;
-            return next();
-          } else {
-            console.log("Passwords do not match");
-            const error = new Error("Your password is not valid");
-            error.status = 401;
-            return next(error);
-          }
-        } else {
-          console.log("Invalid user");
-          const error = new Error("Invalid user");
-          error.status = 401;
-          return next(error);
-        }
-      })
-    : next();
 });
 
 // CREATE - POST /api/courses 201 - Creates a course, sets the Location header to the URI for the course, and returns no content

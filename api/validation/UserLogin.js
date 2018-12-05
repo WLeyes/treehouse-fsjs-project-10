@@ -5,23 +5,23 @@ module.exports = function validateUserLogin(data) {
   console.log("[VALIDATION]", data);
   let errors = {};
 
-  data.emailAddress = !isEmpty(data.emailAddress) ? data.emailAddress : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
+  data.name = !isEmpty(data.name) ? data.name : "";
+  data.pass = !isEmpty(data.pass) ? data.pass : "";
 
   // Email
-  if (!validator.isEmail(data.emailAddress)) {
+  if (!validator.isEmail(data.name)) {
     errors.emailAddress = "Invalid email format.";
   }
 
-  if (validator.isEmpty(data.emailAddress)) {
+  if (validator.isEmpty(data.name)) {
     errors.emailAddress = "Email is required.";
   }
 
-  // Password
-  if (validator.isEmpty(data.password)) {
+  // password
+  if (validator.isEmpty(data.pass)) {
     errors.password = "Password is required.";
   }
-  if (!validator.isLength(data.password, { min: 6, max: 30 })) {
+  if (!validator.isLength(data.pass, { min: 6, max: 30 })) {
     errors.password = "Password must be between 6 and 30 characters.";
   }
 

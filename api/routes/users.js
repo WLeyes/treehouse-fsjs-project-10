@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const auth = require("basic-auth");
 
 const validateUserSignUp = require("../validation/UserSignUp");
@@ -12,7 +12,6 @@ const validateUserLogin = require("../validation/UserLogin");
 // CREATE a user, sets the Location header to "/", and returns no content
 // @route POST /api/users
 router.post("/", (req, res, next) => {
-  console.log("[REQUEST]", req.body);
   // validation
   const { errors, isValid } = validateUserSignUp(req.body);
   if (!isValid) {
@@ -26,10 +25,10 @@ router.post("/", (req, res, next) => {
       });
     }
 
-    bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
-      if (err) {
+    bcrypt.hash(req.body.password, 10, (error, hashedPassword) => {
+      if (error) {
         return res.status(500).json({
-          error: err
+          error
         });
       } else {
         const user = new User({
@@ -53,30 +52,37 @@ router.post("/", (req, res, next) => {
   });
 });
 
-// Middleware GETs the currently authenticated user
-// @route GET /api/users
+// GET USER
+// Middleware Returns the currently authenticated user || todo: fix if username is wrong
 router.use((req, res, next) => {
-  const { errors, isValid } = validateUserLogin(req.body);
+  console.log(auth(req));
+  // validation
+  const { errors, isValid } = validateUserLogin(auth(req));
   if (!isValid) {
     return res.status(400).json(errors);
   }
   auth(req)
     ? User.findOne({ emailAddress: auth(req).name }).exec(function(err, user) {
-        if (!user) {
-          errors.emailAddress = "User not found";
-          return res.status(401).json(errors);
-        }
-        if (bcrypt.compare(auth(req).pass, user.password)) {
-          req.user = user;
-          next();
+        if (user) {
+          if (bcrypt.compareSync(auth(req).pass, user.password)) {
+            req.user = user;
+
+            next();
+          } else {
+            return res.status(409).json({
+              password: "Invalid password"
+            });
+          }
         } else {
-          errors.password = "Invalid password";
-          return res.status(401).json(errors);
+          return res.status(409).json({
+            password: "User not found"
+          });
         }
-        next();
       })
     : next();
 });
+
+// READ - GET /api/users 200 - Returns the currently authenticated user
 router.get("/", (req, res, next) => {
   User.find({}).exec(function(err, user) {
     if (err) return next(err);

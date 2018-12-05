@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { withRouter } from "react-router-dom";
+import isEmpty from "../../utils/isEmpty";
 import { connect } from "react-redux";
 
 import { FormInput } from "../Layout/formFields";
@@ -14,18 +15,22 @@ class UserSignIn extends Component {
       errors: {}
     };
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   onChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
   onSubmit = event => {
     event.preventDefault();
-    const { emailAddress, password } = this.state;
-    const user = {
-      emailAddress,
-      password
-    };
-    console.log(user);
+    const { emailAddress, password, errors } = this.state;
+    this.props.getUser(emailAddress, password, this.props.history);
+    if (!errors) {
+      console.log("no errors?", errors);
+    }
   };
 
   render() {
@@ -44,6 +49,12 @@ class UserSignIn extends Component {
                 value={emailAddress}
                 onChange={onChange}
               />
+              {errors.emailAddress && (
+                <div className="validation--errors--label">
+                  {errors.emailAddress}
+                </div>
+              )}
+
               <FormInput
                 name="password"
                 placeholder="Password"
@@ -51,7 +62,18 @@ class UserSignIn extends Component {
                 value={password}
                 onChange={onChange}
               />
+              {errors.password && (
+                <div className="validation--errors--label">
+                  {errors.password}
+                </div>
+              )}
+
               <div className="grid-100 pad-bottom">
+                {errors.message && (
+                  <div className="validation--errors--label">
+                    {errors.message}
+                  </div>
+                )}
                 <button className="button" type="submit" onClick={onSubmit}>
                   Sign In
                 </button>
@@ -75,4 +97,7 @@ const mapStateToProps = state => ({
   errors: state.errors
 });
 
-export default connect(mapStateToProps)(UserSignIn);
+export default connect(
+  mapStateToProps,
+  { getUser }
+)(withRouter(UserSignIn));

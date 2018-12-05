@@ -6,13 +6,20 @@ import { connect } from "react-redux";
 
 const Header = props => {
   let nav;
+
+  const logoutUser = () => {
+    this.setState({
+      user: null
+    });
+  };
+
   props.user._id
     ? (nav = (
         <nav>
           <span>
             Welcome {props.user.firstName} {props.user.lastName}!
           </span>
-          <Link className="signout" to="index">
+          <Link className="signout" to="/" onClick={logoutUser}>
             Sign Out
           </Link>
         </nav>
