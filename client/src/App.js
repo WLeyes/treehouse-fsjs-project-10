@@ -11,6 +11,7 @@ import UserSignUp from "./Components/Users/UserSignUp";
 import UserSignIn from "./Components/Users/UserSignin";
 
 import Courses from "./Components/Courses";
+import CourseDetail from "./Components/Courses/CourseDetail";
 import CreateCourse from "./Components/Courses/CreateCourse";
 
 import Forbidden from "./Components/Errors/forbidden";
@@ -35,6 +36,14 @@ class App extends Component {
               exact
               path="/courses/create"
               component={CreateCourse}
+            />
+
+            <PublicRoute
+              restricted={false}
+              {...this.props}
+              exact
+              path="/courses/:id"
+              component={CourseDetail}
             />
 
             <PublicRoute

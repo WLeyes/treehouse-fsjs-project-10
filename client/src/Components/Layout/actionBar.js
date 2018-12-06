@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
-const ActionBar = () => {
+const ActionBar = props => {
   return (
     <div className="actions--bar">
       <div className="bounds">
         <div className="grid-100">
-          {this.props.user._id ? (
+          {props.user._id ? (
             <span>
               <Link
                 className="button"
-                to={`/courses/${this.props.course._id}/update`}
+                to={"/courses/${this.props.course._id}/update"}
               >
                 Update Course
               </Link>

@@ -13,3 +13,4 @@ export const UPDATE_COURSE_BY_ID = "UPDATE_COURSE_BY_ID";
 export const DELETE_COURSE_BY_ID = "DELETE_COURSE_BY_ID";
 
 export const GET_ERRORS = "GET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";

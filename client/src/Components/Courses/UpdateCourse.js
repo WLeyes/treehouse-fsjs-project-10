@@ -4,9 +4,9 @@ import { withRouter } from "react-router-dom";
 import { FormInput, FormTextarea } from "../Layout/formFields";
 
 import { connect } from "react-redux";
-import { createCourse } from "../../redux/actions/courseActions";
+import { getCourseById } from "../../redux/actions/courseActions";
 
-class CreateCourse extends Component {
+class UpdateCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +18,11 @@ class CreateCourse extends Component {
       user: this.props.user
     };
   }
+
+  componentDidMount() {
+    // this.props.getCourseById();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -164,5 +169,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { createCourse }
-)(withRouter(CreateCourse));
+  { getCourseById }
+)(withRouter(UpdateCourse));
