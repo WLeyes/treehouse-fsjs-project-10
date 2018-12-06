@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { FormInput, FormTextarea } from "../Layout/formFields";
+import Fade from "react-reveal/Fade";
 
 import { connect } from "react-redux";
 import { getCourseById } from "../../redux/actions/courseActions";
@@ -20,7 +21,8 @@ class UpdateCourse extends Component {
   }
 
   componentDidMount() {
-    // this.props.getCourseById();
+    const { id } = this.props.match.params;
+    this.props.getCourseById(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -63,106 +65,109 @@ class UpdateCourse extends Component {
     } = this.state;
     const author = `${user.firstName} ${user.lastName}`;
     return (
-      <div className="bounds course--detail">
-        <h1>Create Course</h1>
-        <div>
-          {errors.title || errors.description || errors.message ? (
-            <div>
-              <h2 className="validation--errors--label">Validation errors</h2>
-              <div className="validation-errors">
-                <ul>
-                  {errors.title && (
-                    <li className="validation--errors--label">
-                      {errors.title}
+      <Fade right big>
+        <div className="bounds course--detail">
+          <h1>Create Course</h1>
+          <div>
+            {errors.title || errors.description || errors.message ? (
+              <div>
+                <h2 className="validation--errors--label">Validation errors</h2>
+                <div className="validation-errors">
+                  <ul>
+                    {errors.title && (
+                      <li className="validation--errors--label">
+                        {errors.title}
+                      </li>
+                    )}
+                    {errors.description && (
+                      <li className="validation--errors--label">
+                        {errors.description}
+                      </li>
+                    )}
+                    {errors.message && (
+                      <li className="validation--errors--label">
+                        {errors.message}
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            ) : null}
+            <form onSubmit={onSubmit}>
+              <div className="grid-66">
+                <div className="course--header">
+                  <h4 className="course--label">Course</h4>
+                  <FormInput
+                    name="title"
+                    className="input-title course--title--input"
+                    placeholder="Course title..."
+                    value={title}
+                    onChange={onChange}
+                  />
+                  <p>By {author}</p>
+                </div>
+                <div className="course--description">
+                  <FormTextarea
+                    name="description"
+                    className=""
+                    placeholder="Course description..."
+                    value={description}
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+              <div className="grid-25 grid-right">
+                <div className="course--stats">
+                  <ul className="course--stats--list">
+                    <li className="course--stats--list--item">
+                      <h4>Estimated Time</h4>
+                      <FormInput
+                        name="estimatedTime"
+                        className="course--time--input"
+                        placeholder="Hours"
+                        value={estimatedTime}
+                        onChange={onChange}
+                      />
                     </li>
-                  )}
-                  {errors.description && (
-                    <li className="validation--errors--label">
-                      {errors.description}
+                    <li className="course--stats--list--item">
+                      <h4>Materials Needed</h4>
+                      <FormTextarea
+                        name="materialsNeeded"
+                        className=""
+                        placeholder="List materials..."
+                        value={materialsNeeded}
+                        onChange={onChange}
+                      />
                     </li>
-                  )}
-                  {errors.message && (
-                    <li className="validation--errors--label">
-                      {errors.message}
-                    </li>
-                  )}
-                </ul>
+                  </ul>
+                </div>
               </div>
-            </div>
-          ) : null}
-          <form onSubmit={onSubmit}>
-            <div className="grid-66">
-              <div className="course--header">
-                <h4 className="course--label">Course</h4>
-                <FormInput
-                  name="title"
-                  className="input-title course--title--input"
-                  placeholder="Course title..."
-                  value={title}
-                  onChange={onChange}
-                />
-                <p>By {author}</p>
+              <div className="grid-100 pad-bottom">
+                <button className="button" type="submit">
+                  Create Course
+                </button>
+                <button className="button button-secondary" onClick={onSubmit}>
+                  Cancel
+                </button>
               </div>
-              <div className="course--description">
-                <FormTextarea
-                  name="description"
-                  className=""
-                  placeholder="Course description..."
-                  value={description}
-                  onChange={onChange}
-                />
-              </div>
-            </div>
-            <div className="grid-25 grid-right">
-              <div className="course--stats">
-                <ul className="course--stats--list">
-                  <li className="course--stats--list--item">
-                    <h4>Estimated Time</h4>
-                    <FormInput
-                      name="estimatedTime"
-                      className="course--time--input"
-                      placeholder="Hours"
-                      value={estimatedTime}
-                      onChange={onChange}
-                    />
-                  </li>
-                  <li className="course--stats--list--item">
-                    <h4>Materials Needed</h4>
-                    <FormTextarea
-                      name="materialsNeeded"
-                      className=""
-                      placeholder="List materials..."
-                      value={materialsNeeded}
-                      onChange={onChange}
-                    />
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="grid-100 pad-bottom">
-              <button className="button" type="submit">
-                Create Course
-              </button>
-              <button className="button button-secondary" onClick={onSubmit}>
-                Cancel
-              </button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
+      </Fade>
     );
   }
 }
 
-CreateCourse.propTypes = {
+UpdateCourse.propTypes = {
   errors: PropTypes.object,
   user: PropTypes.object.isRequired,
-  createCourse: PropTypes.func.isRequired
+  getCourseById: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     user: state.users.user,
+    course: state.courses.course,
     errors: state.errors
   };
 };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { connect } from "react-redux";
 import { getAllCourses } from "../../redux/actions/courseActions";
@@ -13,11 +13,19 @@ class Courses extends Component {
 
   render() {
     const { courses } = this.props.courses;
+    let renderContent;
+    if (this.props.loading) {
+      renderContent = (
+        <CircularProgress style={{ color: "#7c689b" }} thickness={7} />
+      );
+    } else {
+      renderContent = courses.map(course => (
+        <Course key={course._id} id={course._id} title={course.title} />
+      ));
+    }
     return (
       <div className="bounds">
-        {courses.map(course => (
-          <Course key={course._id} id={course._id} title={course.title} />
-        ))}
+        {renderContent}
         <NewCourse />
       </div>
     );

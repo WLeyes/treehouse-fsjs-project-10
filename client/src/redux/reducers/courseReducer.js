@@ -6,7 +6,8 @@ import {
 const initialState = {
   loading: false,
   courses: [],
-  course: {}
+  course: {},
+  courseAuthor: []
 };
 
 export default function(state = initialState, action) {
@@ -20,7 +21,8 @@ export default function(state = initialState, action) {
       return {
         ...state,
         course: { ...action.payload },
-        loading: false
+        loading: false,
+        courseAuthor: action.payload.user[0]
       };
     case GET_ALL_COURSES:
       return {

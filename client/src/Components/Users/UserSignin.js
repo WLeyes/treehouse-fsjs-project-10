@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import Flip from "react-reveal/Flip";
 
 import { connect } from "react-redux";
 
@@ -34,49 +35,51 @@ class UserSignIn extends Component {
     const { emailAddress, password, errors } = this.state;
     const { onChange, onSubmit } = this;
     return (
-      <div className="bounds">
-        <div className="grid-33 centered signin">
-          <h1>Sign In</h1>
-          <div>
-            <form onSubmit={onSubmit}>
-              <FormInput
-                name="emailAddress"
-                type="email"
-                placeholder="Email Address"
-                value={emailAddress}
-                onChange={onChange}
-                error={errors.emailAddress}
-              />
+      <Flip bottom>
+        <div className="bounds">
+          <div className="grid-33 centered signin">
+            <h1>Sign In</h1>
+            <div>
+              <form onSubmit={onSubmit}>
+                <FormInput
+                  name="emailAddress"
+                  type="email"
+                  placeholder="Email Address"
+                  value={emailAddress}
+                  onChange={onChange}
+                  error={errors.emailAddress}
+                />
 
-              <FormInput
-                name="password"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={onChange}
-                error={errors.password}
-              />
+                <FormInput
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                  value={password}
+                  onChange={onChange}
+                  error={errors.password}
+                />
 
-              {
-                <div className="validation--errors--label">
-                  {errors.message}
+                {
+                  <div className="validation--errors--label">
+                    {errors.message}
+                  </div>
+                }
+                <div className="grid-100 pad-bottom">
+                  <button className="button" type="submit" onClick={onSubmit}>
+                    Sign In
+                  </button>
+                  <button className="button button-secondary">Cancel</button>
                 </div>
-              }
-              <div className="grid-100 pad-bottom">
-                <button className="button" type="submit" onClick={onSubmit}>
-                  Sign In
-                </button>
-                <button className="button button-secondary">Cancel</button>
-              </div>
-            </form>
+              </form>
+            </div>
+            <p>&nbsp;</p>
+            <p>
+              Don't have a user account? <a href="sign-up.html">Click here</a>{" "}
+              to sign up!
+            </p>
           </div>
-          <p>&nbsp;</p>
-          <p>
-            Don't have a user account? <a href="sign-up.html">Click here</a> to
-            sign up!
-          </p>
         </div>
-      </div>
+      </Flip>
     );
   }
 }

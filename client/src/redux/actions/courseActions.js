@@ -2,7 +2,6 @@ import {
   GET_ALL_COURSES,
   GET_COURSE_BY_ID,
   GET_LOADING,
-  POST_LOADING,
   GET_ERRORS
 } from "../actions/types";
 import axios from "axios";

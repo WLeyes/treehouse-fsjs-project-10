@@ -13,6 +13,7 @@ import UserSignIn from "./Components/Users/UserSignin";
 import Courses from "./Components/Courses";
 import CourseDetail from "./Components/Courses/CourseDetail";
 import CreateCourse from "./Components/Courses/CreateCourse";
+import UpdateCourse from "./Components/Courses/UpdateCourse";
 
 import Forbidden from "./Components/Errors/forbidden";
 import UnhandledError from "./Components/Errors/unhandledError";
@@ -36,6 +37,13 @@ class App extends Component {
               exact
               path="/courses/create"
               component={CreateCourse}
+            />
+
+            <PrivateRoute
+              restricted={false}
+              exact
+              path="/courses/:id/update"
+              component={UpdateCourse}
             />
 
             <PublicRoute
@@ -75,6 +83,14 @@ class App extends Component {
               {...this.props}
               exact
               path="/error"
+              component={UnhandledError}
+            />
+
+            <PublicRoute
+              restricted={false}
+              {...this.props}
+              exact
+              path="/unhandledError"
               component={UnhandledError}
             />
 

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Fade from "react-reveal/Fade";
 
 import { connect } from "react-redux";
 
@@ -35,13 +36,15 @@ const Header = props => {
         </nav>
       ));
   return (
-    <div className="header">
-      <div className="bounds">
-        <h1 className="header--logo">Courses</h1>
-        {nav}
+    <Fade top>
+      <div className="header">
+        <div className="bounds">
+          <h1 className="header--logo">Courses</h1>
+          {nav}
+        </div>
+        <hr />
       </div>
-      <hr />
-    </div>
+    </Fade>
   );
 };
 Header.propTypes = {

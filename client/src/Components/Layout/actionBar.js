@@ -1,40 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import Fade from "react-reveal/Fade";
 
 import { connect } from "react-redux";
-
 const ActionBar = props => {
   return (
-    <div className="actions--bar">
-      <div className="bounds">
-        <div className="grid-100">
-          {props.user._id ? (
-            <span>
-              <Link
-                className="button"
-                to={"/courses/${this.props.course._id}/update"}
-              >
-                Update Course
-              </Link>
-              <Link className="button" to="/">
-                Delete Course
-              </Link>
-            </span>
-          ) : null}
-          <Link className="button button-secondary" to="/">
-            Return to List
-          </Link>
+    <Fade top delay={500}>
+      <div className="actions--bar">
+        <div className="bounds">
+          <div className="grid-100">
+            {props.userId && props.userId === props.authorId ? (
+              <span>
+                <Link className="button" to={`${props.match.url}/update`}>
+                  Update Course
+                </Link>
+                <Link className="button" to={`${props.match.url}/delete`}>
+                  Delete Course
+                </Link>
+              </span>
+            ) : null}
+            <Link className="button button-secondary" to="/">
+              Return to List
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </Fade>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    user: state.users.user,
-    course: state.courses.course
+    userId: state.users.user._id,
+    course: state.courses.course,
+    authorId: state.courses.courseAuthor._id
   };
 };
 
-export default connect(mapStateToProps)(ActionBar);
+export default connect(mapStateToProps)(withRouter(ActionBar));
