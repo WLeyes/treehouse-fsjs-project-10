@@ -12,6 +12,10 @@ import UserSignIn from "./Components/Users/UserSignin";
 
 import Courses from "./Components/Courses";
 import CreateCourse from "./Components/Courses/CreateCourse";
+
+import Forbidden from "./Components/Errors/forbidden";
+import UnhandledError from "./Components/Errors/unhandledError";
+import NotFound from "./Components/Errors/notFound";
 class App extends Component {
   render() {
     return (
@@ -47,6 +51,28 @@ class App extends Component {
               exact
               path="/signup"
               component={UserSignUp}
+            />
+
+            <PublicRoute
+              restricted={false}
+              {...this.props}
+              exact
+              path="/forbidden"
+              component={Forbidden}
+            />
+
+            <PublicRoute
+              restricted={false}
+              {...this.props}
+              exact
+              path="/error"
+              component={UnhandledError}
+            />
+
+            <PublicRoute
+              restricted={false}
+              {...this.props}
+              component={NotFound}
             />
           </Switch>
         </Layout>

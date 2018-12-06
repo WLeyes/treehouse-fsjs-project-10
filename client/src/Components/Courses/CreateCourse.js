@@ -53,8 +53,10 @@ class CreateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
-      errors
+      errors,
+      user
     } = this.state;
+    const author = `${user.firstName} ${user.lastName}`;
     return (
       <div className="bounds course--detail">
         <h1>Create Course</h1>
@@ -94,7 +96,7 @@ class CreateCourse extends Component {
                   value={title}
                   onChange={onChange}
                 />
-                <p>By Joe Smith</p>
+                <p>By {author}</p>
               </div>
 
               <div className="course--description">

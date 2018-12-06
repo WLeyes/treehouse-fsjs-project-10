@@ -1,44 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-
+import { getAllCourses } from "../../redux/actions/courseActions";
+import Course from "./Course";
 class Courses extends Component {
   componentWillMount() {
-    // this.props.getAllCourses();
+    this.props.getAllCourses();
   }
 
   render() {
-    console.log(this.props);
+    const { courses } = this.props.courses;
     return (
       <React.Fragment>
         <div className="bounds">
-          <div className="grid-33">
-            <a
-              className="course--module course--link"
-              href="course-detail.html"
-            >
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Build a Basic Bookcase</h3>
-            </a>
-          </div>
-          <div className="grid-33">
-            <a
-              className="course--module course--link"
-              href="course-detail.html"
-            >
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Learn How to Program</h3>
-            </a>
-          </div>
-          <div className="grid-33">
-            <a
-              className="course--module course--link"
-              href="course-detail.html"
-            >
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">Learn How to Test Programs</h3>
-            </a>
-          </div>
+          {courses.map(course => (
+            <Course key={course._id} id={course._id} title={course.title} />
+          ))}
+
           <div className="grid-33">
             <Link
               className="course--module course--add--module"
@@ -67,8 +45,12 @@ class Courses extends Component {
 
 const mapStateToProps = state => {
   return {
-    courses: state.courses
+    courses: state.courses,
+    errors: state.errors
   };
 };
 
-export default connect(mapStateToProps)(Courses);
+export default connect(
+  mapStateToProps,
+  { getAllCourses }
+)(Courses);

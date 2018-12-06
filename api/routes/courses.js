@@ -43,7 +43,7 @@ router.post("/", (req, res) => {
       } else {
         if (req.body.user) {
           const newCourse = new Course({
-            user: req.user,
+            user: req.body.user,
             title: req.body.title,
             description: req.body.description,
             estimatedTime: req.body.estimatedTime,
