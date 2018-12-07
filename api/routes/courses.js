@@ -88,14 +88,11 @@ router.get("/:cID", (req, res, next) => {
 
 // UPDATE - PUT /api/courses/:id 204 - Updates a course and returns no content
 router.put("/:cID", (req, res, next) => {
-  // console.log(`[ REQUEST ]`, req);
-  console.log(`[ USER ID ]:`, req.user._id);
-  console.log(`[ AUTHOR ID ]:`, req.body.user._id);
-  // console.log(`[ REQ BODY ]:`, req.body);
-  if (req.user) {
+  console.log(`[ REQUEST ]`, req.body._id);
+  if (req.body.user) {
     console.log("yes there is a user");
 
-    if (req.user._id.toString() === req.body.user._id.toString()) {
+    if (req.body.user._id.toString() === req.body.user._id.toString()) {
       console.log("is owner");
 
       Course.findOneAndUpdate(
@@ -129,8 +126,8 @@ router.put("/:cID", (req, res, next) => {
 
 // DELETE - DELETE /api/courses/:id 204 - Deletes a course and returns no content
 router.delete("/:cID", (req, res, next) => {
-  if (req.user) {
-    if (req.course.user.toString() === req.user._id.toString()) {
+  if (req.body.user) {
+    if (req.course.user.toString() === req.body.user._id.toString()) {
       console.log("is owner");
       req.course.remove();
       return res.sendStatus(204);

@@ -137,10 +137,13 @@ class CreateCourse extends Component {
                 </div>
               </div>
               <div className="grid-100 pad-bottom">
-                <button className="button" type="submit">
+                <button className="button" type="submit" onClick={onSubmit}>
                   Create Course
                 </button>
-                <button className="button button-secondary" onClick={onSubmit}>
+                <button
+                  className="button button-secondary"
+                  onClick={() => this.props.history.push("/")}
+                >
                   Cancel
                 </button>
               </div>

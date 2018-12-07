@@ -3,9 +3,13 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { FormInput, FormTextarea } from "../Layout/formFields";
 import Fade from "react-reveal/Fade";
+import isEmpty from "../../utils/isEmpty";
 
 import { connect } from "react-redux";
-import { getCourseById } from "../../redux/actions/courseActions";
+import {
+  getCourseById,
+  updateCourseById
+} from "../../redux/actions/courseActions";
 
 class UpdateCourse extends Component {
   constructor(props) {
@@ -29,12 +33,34 @@ class UpdateCourse extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
+
+    if (nextProps.course) {
+      const course = nextProps.course;
+      course.title = !isEmpty(course.title) ? course.title : "";
+      course.description = !isEmpty(course.description)
+        ? course.description
+        : "";
+      course.estimatedTime = !isEmpty(course.estimatedTime)
+        ? course.estimatedTime
+        : "";
+      course.materialsNeeded = !isEmpty(course.materialsNeeded)
+        ? course.materialsNeeded
+        : "";
+      this.setState({
+        title: course.title,
+        description: course.description,
+        estimatedTime: course.estimatedTime,
+        materialsNeeded: course.materialsNeeded
+      });
+    }
   }
 
   onChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
   onSubmit = event => {
+    event.preventDefault();
+    const { _id } = this.props.course;
     const {
       title,
       description,
@@ -42,15 +68,21 @@ class UpdateCourse extends Component {
       materialsNeeded,
       user
     } = this.state;
-    event.preventDefault();
     const course = {
+      _id,
       title,
       description,
       estimatedTime,
       materialsNeeded,
       user
     };
-    this.props.createCourse(course, this.props.history);
+
+    this.props.updateCourseById(
+      _id,
+      course,
+      this.state.user,
+      this.props.history
+    );
   };
 
   render() {
@@ -67,7 +99,7 @@ class UpdateCourse extends Component {
     return (
       <Fade right big>
         <div className="bounds course--detail">
-          <h1>Create Course</h1>
+          <h1>Update Course</h1>
           <div>
             {errors.title || errors.description || errors.message ? (
               <div>
@@ -144,7 +176,7 @@ class UpdateCourse extends Component {
               </div>
               <div className="grid-100 pad-bottom">
                 <button className="button" type="submit">
-                  Create Course
+                  Update Course
                 </button>
                 <button className="button button-secondary" onClick={onSubmit}>
                   Cancel
@@ -174,5 +206,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getCourseById }
+  { getCourseById, updateCourseById }
 )(withRouter(UpdateCourse));

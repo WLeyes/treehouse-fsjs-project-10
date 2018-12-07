@@ -6,29 +6,6 @@ import {
 } from "../actions/types";
 import axios from "axios";
 
-export const getCourseById = id => dispatch => {
-  dispatch(setCourseLoading());
-  axios
-    .get(`http://localhost:5000/api/courses/${id}`)
-    .then(response =>
-      dispatch({
-        type: GET_COURSE_BY_ID,
-        payload: response.data
-      })
-    )
-    .catch(error =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: {}
-      })
-    );
-};
-export const setCourseLoading = () => {
-  return {
-    type: GET_LOADING
-  };
-};
-
 export const getAllCourses = course => dispatch => {
   dispatch(setCourseLoading());
   axios
@@ -59,4 +36,42 @@ export const createCourse = (course, history) => dispatch => {
         payload: error.response.data
       })
     );
+};
+
+export const getCourseById = id => dispatch => {
+  dispatch(setCourseLoading());
+  axios
+    .get(`http://localhost:5000/api/courses/${id}`)
+    .then(response =>
+      dispatch({
+        type: GET_COURSE_BY_ID,
+        payload: response.data
+      })
+    )
+    .catch(error =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: {}
+      })
+    );
+};
+
+export const updateCourseById = (_id, course, user, history) => dispatch => {
+  axios
+    .put(`http://localhost:5000/api/courses/${_id}`, course, user, _id)
+    .then(response => {
+      history.push(`/courses/${_id}`);
+    })
+    .catch(error =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: error.response.data
+      })
+    );
+};
+
+export const setCourseLoading = () => {
+  return {
+    type: GET_LOADING
+  };
 };
