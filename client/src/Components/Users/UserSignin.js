@@ -21,9 +21,9 @@ class UserSignIn extends Component {
       this.setState({ errors: nextProps.errors });
     }
 
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/");
-    }
+    // if (nextProps.auth.isAuthenticated) {
+    //   this.props.history.push("/");
+    // }
   }
 
   onChange = event =>
