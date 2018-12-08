@@ -23,8 +23,11 @@ export const getUser = (user, history) => async dispatch => {
       }
     })
     .then(response => {
-      setAuthToken(response.data);
-      dispatch(setCurrentUser(response));
+      // console.log(response.config.headers.Authorization);
+      const token = response.data;
+      localStorage.setItem("user", JSON.stringify(token));
+      setAuthToken(token);
+      dispatch(setCurrentUser(token));
       history.push("/");
     })
     .catch(error =>
@@ -35,10 +38,10 @@ export const getUser = (user, history) => async dispatch => {
     );
 };
 
-export const setCurrentUser = response => {
+export const setCurrentUser = token => {
   return {
     type: GET_USER,
-    payload: response.data
+    payload: token
   };
 };
 
