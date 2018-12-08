@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
 const Header = props => {
   const { isAuthenticated, user } = props.user;
   let nav;
-  const logoutUser = () => {};
 
   isAuthenticated
     ? (nav = (
@@ -14,7 +13,7 @@ const Header = props => {
           <span>
             Welcome {user.firstName} {user.lastName}!
           </span>
-          <Link className="signout" to="/" onClick={logoutUser}>
+          <Link className="signout" to="/" onClick={props.logout}>
             Sign Out
           </Link>
         </nav>

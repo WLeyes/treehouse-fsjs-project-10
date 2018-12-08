@@ -47,9 +47,8 @@ export const setCurrentUser = token => {
   };
 };
 
-export const logoutUser = () => {
+export const logoutUser = () => dispatch => {
+  localStorage.clear();
   setAuthToken(false);
-  return {
-    type: USER_LOGOUT
-  };
+  dispatch(setCurrentUser({}));
 };

@@ -22,7 +22,11 @@ import NotFound from "./Components/Errors/notFound";
 
 import { connect } from "react-redux";
 import store from "./redux";
-import { setCurrentUser, getUser } from "./redux/actions/userActions";
+import {
+  setCurrentUser,
+  getUser,
+  logoutUser
+} from "./redux/actions/userActions";
 import setAuthToken from "./utils/setAuthToken";
 
 if (localStorage.user) {
@@ -48,7 +52,7 @@ class App extends Component {
     return (
       <Router>
         <React.Fragment>
-          <Header user={this.props.user} />
+          <Header user={this.props.user} logout={this.props.logoutUser} />
           <Switch>
             <PublicRoute
               restricted={false}
@@ -139,5 +143,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setCurrentUser, getUser }
+  { setCurrentUser, getUser, logoutUser }
 )(App);
