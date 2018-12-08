@@ -20,6 +20,10 @@ class UserSignIn extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
+
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
   }
 
   onChange = event =>
@@ -28,7 +32,11 @@ class UserSignIn extends Component {
   onSubmit = event => {
     event.preventDefault();
     const { emailAddress, password } = this.state;
-    this.props.getUser(emailAddress, password, this.props.history);
+    const user = {
+      emailAddress,
+      password
+    };
+    this.props.getUser(user, this.props.history);
   };
 
   render() {
@@ -86,6 +94,7 @@ class UserSignIn extends Component {
 
 const mapStateToProps = state => ({
   user: state.users.user,
+  auth: state.user,
   errors: state.errors
 });
 

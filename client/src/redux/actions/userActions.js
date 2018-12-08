@@ -14,12 +14,12 @@ export const createNewUser = (data, history) => dispatch => {
     );
 };
 
-export const getUser = (emailAddress, password, history) => async dispatch => {
+export const getUser = (user, history) => async dispatch => {
   await axios
     .get("http://localhost:5000/api/users", {
       auth: {
-        username: emailAddress,
-        password: password
+        username: user.emailAddress,
+        password: user.password
       }
     })
     .then(response => {
