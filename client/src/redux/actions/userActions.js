@@ -24,10 +24,12 @@ export const getUser = (user, history) => async dispatch => {
     })
     .then(response => {
       // console.log(response.config.headers.Authorization);
-      const token = response.data;
-      localStorage.setItem("user", JSON.stringify(token));
+      const user = response.data;
+      const token = response.config.headers.Authorization;
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("token", JSON.stringify(token));
       setAuthToken(token);
-      dispatch(setCurrentUser(token));
+      dispatch(setCurrentUser(user));
       history.push("/");
     })
     .catch(error =>

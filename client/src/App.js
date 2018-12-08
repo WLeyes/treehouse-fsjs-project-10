@@ -21,7 +21,15 @@ import UnhandledError from "./Components/Errors/unhandledError";
 import NotFound from "./Components/Errors/notFound";
 
 import { connect } from "react-redux";
-import { setCurrentUser } from "./redux/actions/userActions";
+import store from "./redux";
+import { setCurrentUser, getUser } from "./redux/actions/userActions";
+import setAuthToken from "./utils/setAuthToken";
+
+if (localStorage.user) {
+  setAuthToken(localStorage.user);
+  const user = JSON.parse(localStorage.user);
+  store.dispatch(setCurrentUser(user));
+}
 
 class App extends Component {
   constructor() {
@@ -131,5 +139,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  setCurrentUser
+  { setCurrentUser, getUser }
 )(App);
