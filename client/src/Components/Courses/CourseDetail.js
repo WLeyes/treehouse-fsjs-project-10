@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { connect } from "react-redux";
 import { getCourseById } from "../../redux/actions/courseActions";
 
-import ActionBar from "../Layout/actionBar";
+import ActionBar from "../common/actionBar";
 
 class CourseDetail extends Component {
   componentDidMount() {

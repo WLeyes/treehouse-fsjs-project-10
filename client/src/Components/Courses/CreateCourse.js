@@ -6,7 +6,7 @@ import Flip from "react-reveal/Flip";
 import { connect } from "react-redux";
 import { createCourse } from "../../redux/actions/courseActions";
 
-import { FormInput, FormTextarea } from "../Layout/formFields";
+import { FormInput, FormTextarea } from "../common/formFields";
 class CreateCourse extends Component {
   constructor(props) {
     super(props);

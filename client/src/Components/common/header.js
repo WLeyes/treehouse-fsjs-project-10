@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Fade from "react-reveal/Fade";
-
-import { connect } from "react-redux";
 
 const Header = props => {
   let nav;
 
-  const logoutUser = () => {
-    this.setState({
-      user: null
-    });
-  };
+  const logoutUser = () => {};
 
   props.user._id
     ? (nav = (
@@ -47,16 +41,5 @@ const Header = props => {
     </Fade>
   );
 };
-Header.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  _id: PropTypes.string
-};
 
-const mapStateToProps = state => {
-  return {
-    user: state.users.user
-  };
-};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

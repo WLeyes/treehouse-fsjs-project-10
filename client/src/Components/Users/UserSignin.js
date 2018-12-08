@@ -4,7 +4,7 @@ import Flip from "react-reveal/Flip";
 
 import { connect } from "react-redux";
 
-import { FormInput } from "../Layout/formFields";
+import { FormInput } from "../common/formFields";
 import { getUser } from "../../redux/actions/userActions";
 
 class UserSignIn extends Component {

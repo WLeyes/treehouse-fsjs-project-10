@@ -3,7 +3,8 @@ import "./css/global.css";
 
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-import Layout from "./Components/Layout";
+import Header from "./Components/common/header";
+
 import PublicRoute from "./Components/Routes/publicRoutes";
 import PrivateRoute from "./Components/Routes/privateRoutes";
 
@@ -18,11 +19,28 @@ import UpdateCourse from "./Components/Courses/UpdateCourse";
 import Forbidden from "./Components/Errors/forbidden";
 import UnhandledError from "./Components/Errors/unhandledError";
 import NotFound from "./Components/Errors/notFound";
+
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/actions/userActions";
+
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: {},
+      errors: {}
+    };
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   render() {
     return (
       <Router>
-        <Layout>
+        <React.Fragment>
+          <Header user={this.props.user} />
           <Switch>
             <PublicRoute
               restricted={false}
@@ -100,10 +118,18 @@ class App extends Component {
               component={NotFound}
             />
           </Switch>
-        </Layout>
+        </React.Fragment>
       </Router>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.users.user,
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  setCurrentUser
+)(App);

@@ -6,7 +6,7 @@ import Flip from "react-reveal/Flip";
 import { connect } from "react-redux";
 import { createNewUser } from "../../redux/actions/userActions";
 
-import { FormInput } from "../Layout/formFields";
+import { FormInput } from "../common/formFields";
 
 class UserSignUp extends Component {
   constructor() {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { FormInput, FormTextarea } from "../Layout/formFields";
+import { FormInput, FormTextarea } from "../common/formFields";
 import Fade from "react-reveal/Fade";
 import isEmpty from "../../utils/isEmpty";
 
