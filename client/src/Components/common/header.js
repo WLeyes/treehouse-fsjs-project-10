@@ -4,15 +4,15 @@ import { Link, withRouter } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
 const Header = props => {
+  const { isAuthenticated, user } = props.user;
   let nav;
-
   const logoutUser = () => {};
 
-  props.user._id
+  isAuthenticated
     ? (nav = (
         <nav>
           <span>
-            Welcome {props.user.firstName} {props.user.lastName}!
+            Welcome {user.firstName} {user.lastName}!
           </span>
           <Link className="signout" to="/" onClick={logoutUser}>
             Sign Out

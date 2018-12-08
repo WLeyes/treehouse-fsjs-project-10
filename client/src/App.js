@@ -125,7 +125,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.users.user,
+  user: state.users,
   errors: state.errors
 });
 
