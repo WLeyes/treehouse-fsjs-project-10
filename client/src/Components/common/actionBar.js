@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link, withRouter } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
@@ -27,6 +28,12 @@ const ActionBar = props => {
       </div>
     </Fade>
   );
+};
+
+ActionBar.proptypes = {
+  authorId: PropTypes.string.isRequired,
+  course: PropTypes.object.isRequired,
+  userId: PropTypes.string.isRequired
 };
 
 const mapStateToProps = state => {

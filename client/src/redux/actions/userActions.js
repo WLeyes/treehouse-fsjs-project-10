@@ -1,4 +1,4 @@
-import { GET_USER, USER_LOGOUT, GET_ERRORS } from "./types";
+import { GET_USER, GET_ERRORS } from "./types";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 

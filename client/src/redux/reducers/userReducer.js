@@ -1,4 +1,4 @@
-import { GET_USER, USER_LOGOUT } from "../actions/types";
+import { GET_USER } from "../actions/types";
 import isEmpty from "../../utils/isEmpty";
 const initialState = {
   isAuthenticated: false,

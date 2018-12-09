@@ -41,4 +41,9 @@ const Header = props => {
   );
 };
 
+Header.propTypes = {
+  logout: PropTypes.func.isRequired,
+  user: PropTypes.object
+};
+
 export default Header;

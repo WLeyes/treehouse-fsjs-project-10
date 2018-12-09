@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Fade from "react-reveal/Fade";
 import ReactMarkdown from "react-markdown";
@@ -71,6 +73,11 @@ class CourseDetail extends Component {
     );
   }
 }
+
+CourseDetail.propTypes = {
+  user: PropTypes.object.isRequired,
+  loading: PropTypes.bool
+};
 
 const mapStateToProps = state => ({
   user: state.users.user,
