@@ -7,6 +7,9 @@
 - Editor: https://code.visualstudio.com/
 - Terminal: https://hyper.is/ (with horizontal split api running in top terminal, client in lower half)
 - Package manager: https://yarnpkg.com/en/
+- misc dev tools:
+  - Redux DevTools (I have the project set up to use this if you have it installed) https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+  - Redux logger: https://www.npmjs.com/package/redux-logger
 
 ### Install
 
