@@ -5,6 +5,7 @@ import Fade from "react-reveal/Fade";
 
 const Course = props => {
   // render tamplate of each individual course card.
+  // 
   return (
     <div className="grid-33">
       <Fade left big cascade>
