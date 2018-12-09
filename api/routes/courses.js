@@ -87,8 +87,9 @@ router.get("/:cID", (req, res, next) => {
 
 // UPDATE - PUT /api/courses/:id 204 - Updates a course and returns no content
 router.put("/:cID", (req, res, next) => {
+  console.log("[REQ]", req);
   if (req.body.user) {
-    if (req.body.user._id.toString() === req.body.user._id.toString()) {
+    if (req.course.user[0]._id.toString() === req.body.user._id.toString()) {
       Course.findOneAndUpdate(
         { _id: req.body._id },
         {

@@ -96,7 +96,12 @@ class UpdateCourse extends Component {
       errors,
       user
     } = this.state;
-    const author = `${user.firstName} ${user.lastName}`;
+    const author = `${this.props.author.firstName} ${
+      this.props.author.lastName
+    }`;
+    if (this.props.author._id !== this.props.user._id) {
+      this.props.history.push("/forbidden");
+    }
     return (
       <Fade right big>
         <div className="bounds course--detail">
@@ -201,6 +206,7 @@ const mapStateToProps = state => {
   return {
     user: state.users.user,
     course: state.courses.course,
+    author: state.courses.courseAuthor,
     errors: state.errors
   };
 };
