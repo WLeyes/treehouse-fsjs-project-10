@@ -27,6 +27,10 @@ class UpdateCourse extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.getCourseById(id);
+    // by implementing this way I block /courses/:id/update if typed in the url (even if it is from the course author  in order to force control via buttons)
+    if (this.props.author._id !== this.props.user._id) {
+      this.props.history.push("/forbidden");
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -98,9 +102,6 @@ class UpdateCourse extends Component {
     const author = `${this.props.author.firstName} ${
       this.props.author.lastName
     }`;
-    if (this.props.author._id !== this.props.user._id) {
-      this.props.history.push("/forbidden");
-    }
     return (
       <Fade right big>
         <div className="bounds course--detail">
