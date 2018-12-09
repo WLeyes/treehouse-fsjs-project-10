@@ -20,10 +20,6 @@ class UserSignIn extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
-
-    // if (nextProps.auth.isAuthenticated) {
-    //   this.props.history.push("/");
-    // }
   }
 
   onChange = event =>
@@ -76,7 +72,12 @@ class UserSignIn extends Component {
                   <button className="button" type="submit" onClick={onSubmit}>
                     Sign In
                   </button>
-                  <button className="button button-secondary">Cancel</button>
+                  <button
+                    className="button button-secondary"
+                    onClick={() => this.props.history.push("/")}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
