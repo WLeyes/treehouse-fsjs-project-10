@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Flip from "react-reveal/Flip";
 
 import { connect } from "react-redux";
@@ -130,7 +130,7 @@ class UserSignUp extends Component {
             </div>
             <p>&nbsp;</p>
             <p>
-              Already have a user account? <a href="sign-in.html">Click here</a>{" "}
+              Already have a user account? <Link to="/signin">Click here</Link>{" "}
               to sign in!
             </p>
           </div>

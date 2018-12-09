@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import Flip from "react-reveal/Flip";
 
 import { connect } from "react-redux";
@@ -83,8 +83,8 @@ class UserSignIn extends Component {
             </div>
             <p>&nbsp;</p>
             <p>
-              Don't have a user account? <a href="sign-up.html">Click here</a>{" "}
-              to sign up!
+              Don't have a user account? <Link to="/signup">Click here</Link> to
+              sign up!
             </p>
           </div>
         </div>
