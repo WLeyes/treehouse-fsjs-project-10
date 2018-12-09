@@ -8,7 +8,7 @@
 - Terminal: https://hyper.is/ (with horizontal split api running in top terminal, client in lower half)
 - Package manager: https://yarnpkg.com/en/
 - misc dev tools:
-  - Redux DevTools (I have the project set up to use this if you have it installed) https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
+  - Redux DevTools *is required for dev build* https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd
   - Redux logger: https://www.npmjs.com/package/redux-logger
 
 ### Install
@@ -21,6 +21,8 @@ For first time installation:
 
 To start the server and api:
 you can navigate in to both api and client and run `yarn start` in each one to start or from either directory run `yarn fullstack` to start both at the same time. If you start it this way use `Ctrl c` then select `y`to terminate the client and api
+
+NPM users need to run `npm start` in both api and client folders 
 
 ### Naming Conventions
 
