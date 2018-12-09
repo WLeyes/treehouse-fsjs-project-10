@@ -107,13 +107,9 @@ router.put("/:cID", (req, res, next) => {
         }
       ).exec((error, course) => {
         if (error) {
-          console.log(error);
-          console.log("is not the owner");
           return next();
         } else {
-          console.log(`course: "${req.body.title}" has been updated.`);
           return res.sendStatus(204);
-          // return res.sendStatus(204);
         }
       });
     }
@@ -128,11 +124,9 @@ router.put("/:cID", (req, res, next) => {
 router.delete("/:cID", (req, res, next) => {
   if (req.body.user) {
     if (req.course.user.toString() === req.body.user._id.toString()) {
-      console.log("is owner");
       req.course.remove();
       return res.sendStatus(204);
     } else {
-      console.log("is not the owner");
       const error = new Error("You are not authorized to delete this post");
       error.status = 400;
       return next(error);

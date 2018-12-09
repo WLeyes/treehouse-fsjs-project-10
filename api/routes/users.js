@@ -55,7 +55,6 @@ router.post("/", (req, res, next) => {
 // GET USER
 // Middleware Returns the currently authenticated user || todo: fix if username is wrong
 router.use((req, res, next) => {
-  console.log(auth(req));
   // validation
   const { errors, isValid } = validateUserLogin(auth(req));
   if (!isValid) {

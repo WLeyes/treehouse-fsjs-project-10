@@ -2,7 +2,6 @@ const validator = require("validator");
 const isEmpty = require("./isEmpty");
 
 module.exports = function validateNewCourse(data) {
-  console.log("[VALIDATION]", data);
   let errors = {};
 
   data.title = !isEmpty(data.title) ? data.title : "";

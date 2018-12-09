@@ -2,7 +2,6 @@ const validator = require("validator");
 const isEmpty = require("./isEmpty");
 
 module.exports = function validateUserLogin(data) {
-  console.log("[VALIDATION]", data);
   let errors = {};
 
   data.name = !isEmpty(data.name) ? data.name : "";
