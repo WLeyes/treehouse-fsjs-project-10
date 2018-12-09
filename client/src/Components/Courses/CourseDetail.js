@@ -25,7 +25,7 @@ class CourseDetail extends Component {
     } = this.props.course;
     const { firstName, lastName } = this.props.author;
     let renderContent;
-
+    // loading is set to true then display loading bar else display cards
     if (this.props.loading) {
       renderContent = (
         <CircularProgress style={{ color: "#7c689b" }} thickness={7} />

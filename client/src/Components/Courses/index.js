@@ -14,6 +14,7 @@ class Courses extends Component {
   render() {
     const { courses } = this.props.courses;
     let renderContent;
+    // check if loading is true, if so render loading bar else display the courses
     if (this.props.loading) {
       renderContent = (
         <CircularProgress style={{ color: "#7c689b" }} thickness={7} />

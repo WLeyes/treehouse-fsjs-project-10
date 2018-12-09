@@ -7,6 +7,7 @@ import { deleteCourseById } from "../../redux/actions/courseActions";
 import { connect } from "react-redux";
 
 class ActionBar extends Component {
+  // Delete Course
   deleteCourse = event => {
     event.preventDefault();
     this.props.deleteCourseById(
@@ -18,6 +19,7 @@ class ActionBar extends Component {
 
   render() {
     const { userId, authorId, match } = this.props;
+    // if there is a user id and the user id = the course user id display the action bar update & delete buttons
     return (
       <Fade top delay={500}>
         <div className="actions--bar">

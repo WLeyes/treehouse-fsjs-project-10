@@ -4,6 +4,8 @@ import { Route, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 
+// Check if user is authenticated, if so and the route is restricted then redirect them to the home route
+// this is a way to block them from the signin and signup pages as they do not need to access it
 const PublicRoute = ({ user, component: Component, ...remainingProps }) => (
   <Route
     {...remainingProps}

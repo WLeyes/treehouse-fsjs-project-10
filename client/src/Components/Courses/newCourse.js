@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Fade from "react-reveal/Fade";
 
+// Create course render template
 const NewCourse = () => {
   return (
     <div className="grid-33">

@@ -6,7 +6,7 @@ import Fade from "react-reveal/Fade";
 const Header = props => {
   const { isAuthenticated, user } = props.user;
   let nav;
-
+  //  check if the user is authenticated if so greet them else display signin & signup buttons
   isAuthenticated
     ? (nav = (
         <nav>

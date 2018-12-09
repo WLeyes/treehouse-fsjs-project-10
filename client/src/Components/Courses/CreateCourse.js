@@ -19,15 +19,18 @@ class CreateCourse extends Component {
       user: this.props.user
     };
   }
+  // check prop state
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
 
+  // if the input changes then update its value
   onChange = event =>
     this.setState({ [event.target.name]: event.target.value });
 
+  // Submit
   onSubmit = event => {
     const {
       title,

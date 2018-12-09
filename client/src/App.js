@@ -3,10 +3,12 @@ import "./css/global.css";
 
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-import Header from "./Components/common/header";
-
+// Routes
 import PublicRoute from "./Components/Routes/publicRoutes";
 import PrivateRoute from "./Components/Routes/privateRoutes";
+
+// Components
+import Header from "./Components/common/header";
 
 import UserSignUp from "./Components/Users/UserSignUp";
 import UserSignIn from "./Components/Users/UserSignin";
@@ -20,6 +22,7 @@ import Forbidden from "./Components/Errors/forbidden";
 import UnhandledError from "./Components/Errors/unhandledError";
 import NotFound from "./Components/Errors/notFound";
 
+// Redux
 import { connect } from "react-redux";
 import store from "./redux";
 import {
@@ -29,6 +32,7 @@ import {
 } from "./redux/actions/userActions";
 import setAuthToken from "./utils/setAuthToken";
 
+// Check if user is in localStorage
 if (localStorage.user) {
   setAuthToken(localStorage.user);
   const user = JSON.parse(localStorage.user);
@@ -43,6 +47,7 @@ class App extends Component {
       errors: {}
     };
   }
+  // Check for update to props state
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });

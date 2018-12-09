@@ -85,6 +85,7 @@ class UpdateCourse extends Component {
     );
   };
 
+  // Updates the current course
   render() {
     const { onChange, onSubmit } = this;
     const {
