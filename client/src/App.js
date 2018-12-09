@@ -119,14 +119,6 @@ class App extends Component {
             <PublicRoute
               restricted={false}
               {...this.props}
-              exact
-              path="/unhandledError"
-              component={UnhandledError}
-            />
-
-            <PublicRoute
-              restricted={false}
-              {...this.props}
               component={NotFound}
             />
           </Switch>
