@@ -93,8 +93,7 @@ class UpdateCourse extends Component {
       description,
       estimatedTime,
       materialsNeeded,
-      errors,
-      user
+      errors
     } = this.state;
     const author = `${this.props.author.firstName} ${
       this.props.author.lastName
