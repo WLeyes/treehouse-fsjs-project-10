@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+// Redux
 import { connect } from "react-redux";
 import { getAllCourses } from "../../redux/actions/courseActions";
 
+// Components
 import Course from "./course";
 import NewCourse from "./newCourse";
+
 class Courses extends Component {
   componentWillMount() {
     this.props.getAllCourses();

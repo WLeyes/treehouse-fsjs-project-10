@@ -12,6 +12,7 @@ import ActionBar from "../common/actionBar";
 
 class CourseDetail extends Component {
   componentDidMount() {
+    // get id from route
     const { id } = this.props.match.params;
     this.props.getCourseById(id);
   }
