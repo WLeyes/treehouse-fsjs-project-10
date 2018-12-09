@@ -70,6 +70,27 @@ export const updateCourseById = (_id, course, user, history) => dispatch => {
     );
 };
 
+export const deleteCourseById = (course, user, history) => dispatch => {
+  const token = localStorage.token;
+  if (
+    window.confirm(`Are you sure you would like to delete "${course.title}"?`)
+  ) {
+    axios
+      .delete(`http://localhost:5000/api/courses/${course._id}`, {
+        data: {
+          _id: user._id
+        }
+      })
+      .then(response => history.push(`/`))
+      .catch(error =>
+        dispatch({
+          type: GET_ERRORS,
+          payload: error.response.data
+        })
+      );
+  }
+};
+
 export const setCourseLoading = () => {
   return {
     type: GET_LOADING

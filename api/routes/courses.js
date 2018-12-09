@@ -6,6 +6,7 @@ const Course = require("../models/Course");
 const validateNewCourse = require("../validation/NewCourse");
 
 router.param("cID", function(req, res, next, id) {
+  // console.log("REQ", req);
   if (id.match(/^[0-9a-fA-F]{24}$/)) {
     // Check that id is a valid ObjectId
     Course.findById(id, function(error, doc) {
@@ -122,11 +123,15 @@ router.put("/:cID", (req, res, next) => {
 
 // DELETE - DELETE /api/courses/:id 204 - Deletes a course and returns no content
 router.delete("/:cID", (req, res, next) => {
-  if (req.body.user) {
-    if (req.course.user.toString() === req.body.user._id.toString()) {
+  if (req.body) {
+    console.log("[COURSE USER]", req.course.user[0]._id);
+    console.log("[USER]", req.body._id);
+    if (req.course.user[0]._id.toString() === req.body._id) {
+      console.log("is owner");
       req.course.remove();
       return res.sendStatus(204);
     } else {
+      console.log("is not the owner");
       const error = new Error("You are not authorized to delete this post");
       error.status = 400;
       return next(error);
