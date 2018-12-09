@@ -119,7 +119,12 @@ class UserSignUp extends Component {
                   <button className="button" type="submit" onClick={onSubmit}>
                     Sign Up
                   </button>
-                  <button className="button button-secondary">Cancel</button>
+                  <button
+                    className="button button-secondary"
+                    onClick={() => this.props.history.push("/")}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </form>
             </div>
