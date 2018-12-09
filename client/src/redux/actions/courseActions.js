@@ -71,7 +71,6 @@ export const updateCourseById = (_id, course, user, history) => dispatch => {
 };
 
 export const deleteCourseById = (course, user, history) => dispatch => {
-  const token = localStorage.token;
   if (
     window.confirm(`Are you sure you would like to delete "${course.title}"?`)
   ) {
