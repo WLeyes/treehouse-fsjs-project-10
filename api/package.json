@@ -6,8 +6,8 @@
   "scripts": {
     "start": "nodemon ./app.js",
     "seed": "cross-env DB_ENABLE_LOGGING=true node './seed'",
-    "client": "cd ../client && yarn start",
-    "fullstack": "concurrently --kill-others \"yarn start\" \"yarn client\""
+    "client": "cd ../client && npm start",
+    "fullstack": "concurrently --kill-others \"npm start\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
